@@ -1,8 +1,14 @@
 import Foundation
 
 class OpenAIService {
-    private let apiKey = ""
+    private let apiKey: String
 
+    init() {
+        guard let key: String = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] else {
+            fatalError("OPENAI_API_KEY is not set in the environment variables")
+        }
+        self.apiKey = key
+    }
     /**
      Fetches a response from the OpenAI API.
 
@@ -19,7 +25,7 @@ class OpenAIService {
         let body: [String: Any] = [
             "model": "gpt-4o",
             "messages": messages,
-            "max_tokens": 50
+            "max_tokens": 1000
         ]
 
         do {
