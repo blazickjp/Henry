@@ -42,22 +42,30 @@ struct AppMenu: View {
                             Markdown(viewModel.responseText)
                                 .padding()
                                 .frame(maxWidth: 350, maxHeight: .infinity, alignment: .leading)
+                                .background(Color.amazonDarkBlue).opacity(0.3)
+                                .cornerRadius(10)
+                                .padding()   
                         }
                     }
-                    HStack {
+
+                        HStack {
                         Image(systemName: "magnifyingglass")
                         TextField("Search...", text: $viewModel.userInput, onCommit: {
                             if !viewModel.userInput.isEmpty {
                                 viewModel.fetchResponse()
                             }
                         })
+                        .background(Color("AccentColor"))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.amazonDarkBlue, lineWidth: 1)
+                        )
+
+                        .frame(height: 40.0)
+                            .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                 }
-                .padding()
-                .background(Color.amazonDarkBlue.opacity(0.3))
-                .cornerRadius(20)
-                .padding()
             }
             .frame(width: 350, height: 400) // Adjust height based on content
             .onPreferenceChange(ContentSizeKey.self) { size in

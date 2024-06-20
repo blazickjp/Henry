@@ -1,14 +1,14 @@
 import Foundation
+import HTTPTypes
 
 class OpenAIService {
     private let apiKey: String
 
     init() {
-        guard let key: String = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] else {
-            fatalError("OPENAI_API_KEY is not set in the environment variables")
-        }
-        self.apiKey = key
+        self.apiKey = Config.openAIAPIKey
     }
+    
+    
     /**
      Fetches a response from the OpenAI API.
 
@@ -29,8 +29,13 @@ class OpenAIService {
         ]
 
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: body, options: [])
+            let jsonData = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
             request.httpBody = jsonData
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("JSON Data:", jsonString)
+            } else {
+                print("Failed to convert JSON data to string")
+            }
 
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
