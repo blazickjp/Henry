@@ -12,13 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>56</string>
+					<string>85</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>55</string>
+					<string>84</string>
 					<key>Timestamp</key>
-					<string>740374711.843732</string>
+					<string>740674288.138899</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -34,16 +34,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>                }
+				<string>        AppMenu()
 </string>
 				<key>leading</key>
-				<string>                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                    }
+				<string>struct AppMenu_Previews: PreviewProvider {
+    static var previews: some View {
 </string>
 				<key>trailing</key>
-				<string>                .padding()
-                .background(Color.amazonDarkBlue.opacity(0.3))
-                .cornerRadius(20)
+				<string>    }
+}
+
 </string>
 			</dict>
 			<key>type</key>

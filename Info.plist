@@ -3,3 +3,9 @@
     <key>NSAllowsArbitraryLoads</key>
     <true/>
 </dict>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Henry needs your location to provide location-specific information.</string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>This application needs access to your location to provide continuous location-specific information even when the app is not in the foreground.</string>
+<key>NSScreenCaptureUsageDescription</key>
+<string>Henry needs permission to capture screenshots for analysis.</string>

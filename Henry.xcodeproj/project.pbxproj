@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		54ADFB0D2C232A59005D9CA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ADFB0C2C232A59005D9CA9 /* Config.swift */; };
 		54ADFB102C233159005D9CA9 /* HTTPTypes in Frameworks */ = {isa = PBXBuildFile; productRef = 54ADFB0F2C233159005D9CA9 /* HTTPTypes */; };
 		54ADFB122C233159005D9CA9 /* HTTPTypesFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 54ADFB112C233159005D9CA9 /* HTTPTypesFoundation */; };
 		C6C4017A2C1EA22A0072582A /* AppMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C401792C1EA22A0072582A /* AppMenuViewModel.swift */; };
 		C6C4017D2C207E070072582A /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C6C4017C2C207E070072582A /* MarkdownUI */; };
+		C6C4017F2C25C8120072582A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C4017E2C25C8120072582A /* Config.swift */; };
+		C6C401812C2685190072582A /* AnthropicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C401802C2685190072582A /* AnthropicService.swift */; };
+		C6C401842C277B470072582A /* ScreenCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C401822C277B470072582A /* ScreenCaptureService.swift */; };
+		C6C401852C277B470072582A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C401832C277B470072582A /* LocationService.swift */; };
 		C6CC592B2C1E5EA3004C7ED2 /* HenryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC592A2C1E5EA3004C7ED2 /* HenryApp.swift */; };
 		C6CC592D2C1E5EA3004C7ED2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC592C2C1E5EA3004C7ED2 /* ContentView.swift */; };
 		C6CC592F2C1E5EA3004C7ED2 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC592E2C1E5EA3004C7ED2 /* Item.swift */; };
@@ -23,8 +26,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		54ADFB0C2C232A59005D9CA9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		C6C401792C1EA22A0072582A /* AppMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMenuViewModel.swift; sourceTree = "<group>"; };
+		C6C4017E2C25C8120072582A /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		C6C401802C2685190072582A /* AnthropicService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnthropicService.swift; sourceTree = "<group>"; };
+		C6C401822C277B470072582A /* ScreenCaptureService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenCaptureService.swift; sourceTree = "<group>"; };
+		C6C401832C277B470072582A /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		C6CC59272C1E5EA3004C7ED2 /* Henry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Henry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6CC592A2C1E5EA3004C7ED2 /* HenryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HenryApp.swift; sourceTree = "<group>"; };
 		C6CC592C2C1E5EA3004C7ED2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,7 +76,10 @@
 		C6CC59292C1E5EA3004C7ED2 /* Henry */ = {
 			isa = PBXGroup;
 			children = (
-				54ADFB0C2C232A59005D9CA9 /* Config.swift */,
+				C6C401832C277B470072582A /* LocationService.swift */,
+				C6C401822C277B470072582A /* ScreenCaptureService.swift */,
+				C6C401802C2685190072582A /* AnthropicService.swift */,
+				C6C4017E2C25C8120072582A /* Config.swift */,
 				C6CC592A2C1E5EA3004C7ED2 /* HenryApp.swift */,
 				C6CC59472C1E93A4004C7ED2 /* OpenAIResponse.swift */,
 				C6CC593B2C1E5FD0004C7ED2 /* AppMenu.swift */,
@@ -172,12 +181,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6C401812C2685190072582A /* AnthropicService.swift in Sources */,
 				C6CC592D2C1E5EA3004C7ED2 /* ContentView.swift in Sources */,
 				C6CC592F2C1E5EA3004C7ED2 /* Item.swift in Sources */,
 				C6C4017A2C1EA22A0072582A /* AppMenuViewModel.swift in Sources */,
-				54ADFB0D2C232A59005D9CA9 /* Config.swift in Sources */,
 				C6CC593C2C1E5FD0004C7ED2 /* AppMenu.swift in Sources */,
 				C6CC59562C1E93A4004C7ED2 /* OpenAIResponse.swift in Sources */,
+				C6C401852C277B470072582A /* LocationService.swift in Sources */,
+				C6C401842C277B470072582A /* ScreenCaptureService.swift in Sources */,
+				C6C4017F2C25C8120072582A /* Config.swift in Sources */,
 				C6CC59572C1E93A4004C7ED2 /* OpenAIService.swift in Sources */,
 				C6CC592B2C1E5EA3004C7ED2 /* HenryApp.swift in Sources */,
 			);

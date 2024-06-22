@@ -1,5 +1,5 @@
 {
-  "originHash" : "e4e19bbae7e43b0532f7dab994bf43f028019cf69f92fb86b3feaa04ef718393",
+  "originHash" : "e78d4fea173f09a790719ded375b26b4332b96326a32356ecafd5a1e0dd6701c",
   "pins" : [
     {
       "identity" : "networkimage",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-http-types.git",
       "state" : {
-        "revision" : "9bee2fdb79cc740081abd8ebd80738063d632286",
-        "version" : "1.1.0"
+        "revision" : "1ddbea1ee34354a6a2532c60f98501c35ae8edfa",
+        "version" : "1.2.0"
       }
     },
     {

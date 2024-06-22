@@ -1,5 +1,6 @@
 import Foundation
 import HTTPTypes
+import HTTPTypesFoundation
 
 class OpenAIService {
     private let apiKey: String
