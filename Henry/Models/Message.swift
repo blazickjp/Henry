@@ -152,13 +152,24 @@ extension Message {
             ])
         }
 
-        // Add text content
-        if !content.isEmpty {
-            contentBlocks.append([
-                "type": "text",
-                "text": content
-            ])
+        // Add text content - always include a text block for API compatibility
+        // The Anthropic API requires non-empty content for all messages
+        let trimmedContent = content.trimmingCharacters(in: .whitespacesAndNewlines)
+        let textContent: String
+        if trimmedContent.isEmpty && !imageAttachments.isEmpty {
+            // Provide a default prompt when image is present but no text
+            textContent = "What do you see in this image?"
+        } else if trimmedContent.isEmpty {
+            // For messages without images and no text, use placeholder
+            textContent = " "
+        } else {
+            textContent = content
         }
+
+        contentBlocks.append([
+            "type": "text",
+            "text": textContent
+        ])
 
         return [
             "role": role.rawValue,

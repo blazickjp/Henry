@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import XCTest
 @testable import Henry
 
 // MARK: - Test Helpers

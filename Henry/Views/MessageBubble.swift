@@ -5,6 +5,7 @@ struct MessageBubble: View {
     let message: Message
     let onArtifactTap: (Artifact) -> Void
     let onAnnotate: ((Message, UIImage) -> Void)?
+    let onRegenerate: ((Message) -> Void)?
 
     @State private var bubbleSize: CGSize = .zero
 
@@ -12,10 +13,16 @@ struct MessageBubble: View {
         message.role == .user
     }
 
-    init(message: Message, onArtifactTap: @escaping (Artifact) -> Void, onAnnotate: ((Message, UIImage) -> Void)? = nil) {
+    init(
+        message: Message,
+        onArtifactTap: @escaping (Artifact) -> Void,
+        onAnnotate: ((Message, UIImage) -> Void)? = nil,
+        onRegenerate: ((Message) -> Void)? = nil
+    ) {
         self.message = message
         self.onArtifactTap = onArtifactTap
         self.onAnnotate = onAnnotate
+        self.onRegenerate = onRegenerate
     }
 
     var body: some View {
@@ -50,6 +57,11 @@ struct MessageBubble: View {
                     // Annotate button (only for assistant messages)
                     if !isUser, onAnnotate != nil {
                         annotateButton
+                    }
+
+                    // Regenerate button (only for assistant messages)
+                    if !isUser, onRegenerate != nil {
+                        regenerateButton
                     }
 
                     Spacer()
@@ -113,6 +125,25 @@ struct MessageBubble: View {
                 Image(systemName: "pencil.tip.crop.circle")
                     .font(.caption)
                 Text("Annotate")
+                    .font(.caption)
+            }
+            .foregroundColor(.claudeOrange)
+            .padding(.horizontal, Spacing.sm)
+            .padding(.vertical, Spacing.xs)
+            .background(Color.claudeOrange.opacity(0.1))
+            .cornerRadius(Spacing.sm)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var regenerateButton: some View {
+        Button {
+            onRegenerate?(message)
+        } label: {
+            HStack(spacing: Spacing.xs) {
+                Image(systemName: "arrow.clockwise")
+                    .font(.caption)
+                Text("Regenerate")
                     .font(.caption)
             }
             .foregroundColor(.claudeOrange)

@@ -1,10 +1,17 @@
 import SwiftUI
 import MarkdownUI
+import PhotosUI
 
 struct ChatView: View {
     @ObservedObject var viewModel: ChatViewModel
     @FocusState private var isInputFocused: Bool
     @State private var scrollProxy: ScrollViewProxy?
+
+    // Photo picker state
+    @State private var selectedPhotoItem: PhotosPickerItem?
+    @State private var selectedImage: UIImage?
+    @State private var showPhotoPreview: Bool = false
+    @State private var photoCaption: String = ""
 
     var body: some View {
         GeometryReader { geometry in
@@ -39,6 +46,27 @@ struct ChatView: View {
                     }
                 )
             }
+        }
+        .sheet(isPresented: $showPhotoPreview) {
+            PhotoPreviewSheet(
+                image: selectedImage,
+                caption: $photoCaption,
+                onSend: {
+                    if let image = selectedImage {
+                        Task {
+                            await viewModel.sendAnnotatedMessage(image: image, text: photoCaption)
+                            showPhotoPreview = false
+                            selectedImage = nil
+                            photoCaption = ""
+                        }
+                    }
+                },
+                onCancel: {
+                    showPhotoPreview = false
+                    selectedImage = nil
+                    photoCaption = ""
+                }
+            )
         }
     }
 
@@ -123,6 +151,11 @@ struct ChatView: View {
                             },
                             onAnnotate: { message, image in
                                 viewModel.startAnnotation(for: message, with: image)
+                            },
+                            onRegenerate: { message in
+                                Task {
+                                    await viewModel.regenerateResponse(for: message)
+                                }
                             }
                         )
                         .id(message.id)
@@ -170,7 +203,7 @@ struct ChatView: View {
                 HStack(spacing: Spacing.xs) {
                     ProgressView()
                         .scaleEffect(0.7)
-                    Text("Generating...")
+                    Text(viewModel.isSearching ? "Searching the web..." : "Generating...")
                         .font(.caption)
                         .foregroundColor(.textSecondary)
                 }
@@ -225,6 +258,13 @@ struct ChatView: View {
             Divider()
 
             HStack(spacing: Spacing.md) {
+                // Photo Picker Button
+                PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
+                    Image(systemName: "photo")
+                        .font(.system(size: 24))
+                        .foregroundColor(.claudeOrange)
+                }
+
                 // Text Input
                 TextField("Message Henry...", text: $viewModel.inputText, axis: .vertical)
                     .textFieldStyle(.plain)
@@ -252,8 +292,77 @@ struct ChatView: View {
                 }
                 .disabled(viewModel.inputText.isEmpty && !viewModel.isLoading)
             }
+            .onChange(of: selectedPhotoItem) { _, newItem in
+                Task {
+                    if let newItem = newItem,
+                       let data = try? await newItem.loadTransferable(type: Data.self),
+                       let image = UIImage(data: data) {
+                        selectedImage = image
+                        showPhotoPreview = true
+                        selectedPhotoItem = nil
+                    }
+                }
+            }
             .padding()
             .background(Color.backgroundSecondary)
+        }
+    }
+}
+
+// MARK: - Photo Preview Sheet
+
+struct PhotoPreviewSheet: View {
+    let image: UIImage?
+    @Binding var caption: String
+    let onSend: () -> Void
+    let onCancel: () -> Void
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: Spacing.lg) {
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxHeight: 400)
+                        .cornerRadius(Spacing.cardCornerRadius)
+                        .padding(.horizontal)
+                }
+
+                TextField("Add a caption (optional)...", text: $caption, axis: .vertical)
+                    .textFieldStyle(.plain)
+                    .font(.body)
+                    .lineLimit(1...4)
+                    .padding()
+                    .background(Color.backgroundSecondary)
+                    .cornerRadius(Spacing.sm)
+                    .padding(.horizontal)
+
+                Text("Claude will analyze this image and respond to your caption")
+                    .font(.caption)
+                    .foregroundColor(.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+
+                Spacer()
+            }
+            .padding(.top)
+            .navigationTitle("Send Photo")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        onCancel()
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Send") {
+                        onSend()
+                    }
+                    .fontWeight(.semibold)
+                    .foregroundColor(.claudeOrange)
+                }
+            }
         }
     }
 }

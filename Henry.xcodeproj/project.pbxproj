@@ -9,38 +9,81 @@
 /* Begin PBXBuildFile section */
 		54ADFB102C233159005D9CA9 /* HTTPTypes in Frameworks */ = {isa = PBXBuildFile; productRef = 54ADFB0F2C233159005D9CA9 /* HTTPTypes */; };
 		54ADFB122C233159005D9CA9 /* HTTPTypesFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 54ADFB112C233159005D9CA9 /* HTTPTypesFoundation */; };
-		C6C4017A2C1EA22A0072582A /* AppMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C401792C1EA22A0072582A /* AppMenuViewModel.swift */; };
+		A1000001000000000000001A /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001000000000000001B /* Artifact.swift */; };
+		A1000002000000000000001A /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000001B /* Conversation.swift */; };
+		A1000003000000000000001A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000003000000000000001B /* Message.swift */; };
+		A1000004000000000000001A /* AnthropicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004000000000000001B /* AnthropicService.swift */; };
+		A1000005000000000000001A /* WebSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000005000000000000001B /* WebSearchService.swift */; };
+		A1000006000000000000001A /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000006000000000000001B /* AnnotationView.swift */; };
+		A1000007000000000000001A /* ArtifactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000007000000000000001B /* ArtifactView.swift */; };
+		A1000008000000000000001A /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000008000000000000001B /* ChatView.swift */; };
+		A1000009000000000000001A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000009000000000000001B /* ChatViewModel.swift */; };
+		A100000A000000000000001A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000A000000000000001B /* MainView.swift */; };
+		A100000B000000000000001A /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000B000000000000001B /* MessageBubble.swift */; };
+		A100000C000000000000001A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000C000000000000001B /* SettingsView.swift */; };
+		A100000D000000000000001A /* WebBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000D000000000000001B /* WebBrowserView.swift */; };
+		A100000E000000000000001A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000E000000000000001B /* AppTheme.swift */; };
 		C6C4017D2C207E070072582A /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C6C4017C2C207E070072582A /* MarkdownUI */; };
 		C6C4017F2C25C8120072582A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C4017E2C25C8120072582A /* Config.swift */; };
-		C6C401812C2685190072582A /* AnthropicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C401802C2685190072582A /* AnthropicService.swift */; };
-		C6C401842C277B470072582A /* ScreenCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C401822C277B470072582A /* ScreenCaptureService.swift */; };
-		C6C401852C277B470072582A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C401832C277B470072582A /* LocationService.swift */; };
 		C6CC592B2C1E5EA3004C7ED2 /* HenryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC592A2C1E5EA3004C7ED2 /* HenryApp.swift */; };
-		C6CC592D2C1E5EA3004C7ED2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC592C2C1E5EA3004C7ED2 /* ContentView.swift */; };
-		C6CC592F2C1E5EA3004C7ED2 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC592E2C1E5EA3004C7ED2 /* Item.swift */; };
 		C6CC59312C1E5EA4004C7ED2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6CC59302C1E5EA4004C7ED2 /* Assets.xcassets */; };
 		C6CC59352C1E5EA4004C7ED2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6CC59342C1E5EA4004C7ED2 /* Preview Assets.xcassets */; };
-		C6CC593C2C1E5FD0004C7ED2 /* AppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC593B2C1E5FD0004C7ED2 /* AppMenu.swift */; };
-		C6CC59562C1E93A4004C7ED2 /* OpenAIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC59472C1E93A4004C7ED2 /* OpenAIResponse.swift */; };
-		C6CC59572C1E93A4004C7ED2 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC59482C1E93A4004C7ED2 /* OpenAIService.swift */; };
+		/* Test Build Files */
+		B2000001000000000000001A /* MessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000001000000000000001B /* MessageTests.swift */; };
+		B2000002000000000000001A /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000002000000000000001B /* ConversationTests.swift */; };
+		B2000003000000000000001A /* ArtifactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000003000000000000001B /* ArtifactTests.swift */; };
+		B2000004000000000000001A /* ImageAttachmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000004000000000000001B /* ImageAttachmentTests.swift */; };
+		B2000005000000000000001A /* AnthropicServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000005000000000000001B /* AnthropicServiceTests.swift */; };
+		B2000006000000000000001A /* MultimodalServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000006000000000000001B /* MultimodalServiceTests.swift */; };
+		B2000007000000000000001A /* WebSearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000007000000000000001B /* WebSearchServiceTests.swift */; };
+		B2000008000000000000001A /* ChatViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000008000000000000001B /* ChatViewModelTests.swift */; };
+		B2000009000000000000001A /* MockConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000009000000000000001B /* MockConfig.swift */; };
+		B200000A000000000000001A /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B200000A000000000000001B /* TestHelpers.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B2000020000000000000001C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6CC591F2C1E5EA3004C7ED2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6CC59262C1E5EA3004C7ED2;
+			remoteInfo = Henry;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		C6C401792C1EA22A0072582A /* AppMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMenuViewModel.swift; sourceTree = "<group>"; };
+		A1000001000000000000001B /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
+		A1000002000000000000001B /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		A1000003000000000000001B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		A1000004000000000000001B /* AnthropicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnthropicService.swift; sourceTree = "<group>"; };
+		A1000005000000000000001B /* WebSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearchService.swift; sourceTree = "<group>"; };
+		A1000006000000000000001B /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		A1000007000000000000001B /* ArtifactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactView.swift; sourceTree = "<group>"; };
+		A1000008000000000000001B /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		A1000009000000000000001B /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		A100000A000000000000001B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A100000B000000000000001B /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
+		A100000C000000000000001B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A100000D000000000000001B /* WebBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserView.swift; sourceTree = "<group>"; };
+		A100000E000000000000001B /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		C6C4017E2C25C8120072582A /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		C6C401802C2685190072582A /* AnthropicService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnthropicService.swift; sourceTree = "<group>"; };
-		C6C401822C277B470072582A /* ScreenCaptureService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenCaptureService.swift; sourceTree = "<group>"; };
-		C6C401832C277B470072582A /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		C6CC59272C1E5EA3004C7ED2 /* Henry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Henry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6CC592A2C1E5EA3004C7ED2 /* HenryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HenryApp.swift; sourceTree = "<group>"; };
-		C6CC592C2C1E5EA3004C7ED2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		C6CC592E2C1E5EA3004C7ED2 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		C6CC59302C1E5EA4004C7ED2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6CC59322C1E5EA4004C7ED2 /* Henry.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Henry.entitlements; sourceTree = "<group>"; };
 		C6CC59342C1E5EA4004C7ED2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C6CC593B2C1E5FD0004C7ED2 /* AppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenu.swift; sourceTree = "<group>"; };
-		C6CC59472C1E93A4004C7ED2 /* OpenAIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenAIResponse.swift; sourceTree = "<group>"; };
-		C6CC59482C1E93A4004C7ED2 /* OpenAIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
+		/* Test File References */
+		B2000010000000000000001B /* HenryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HenryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2000001000000000000001B /* MessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTests.swift; sourceTree = "<group>"; };
+		B2000002000000000000001B /* ConversationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
+		B2000003000000000000001B /* ArtifactTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactTests.swift; sourceTree = "<group>"; };
+		B2000004000000000000001B /* ImageAttachmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachmentTests.swift; sourceTree = "<group>"; };
+		B2000005000000000000001B /* AnthropicServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnthropicServiceTests.swift; sourceTree = "<group>"; };
+		B2000006000000000000001B /* MultimodalServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimodalServiceTests.swift; sourceTree = "<group>"; };
+		B2000007000000000000001B /* WebSearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearchServiceTests.swift; sourceTree = "<group>"; };
+		B2000008000000000000001B /* ChatViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModelTests.swift; sourceTree = "<group>"; };
+		B2000009000000000000001B /* MockConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConfig.swift; sourceTree = "<group>"; };
+		B200000A000000000000001B /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,13 +97,63 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2000011000000000000001C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A1000010000000000000001C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A1000001000000000000001B /* Artifact.swift */,
+				A1000002000000000000001B /* Conversation.swift */,
+				A1000003000000000000001B /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A1000011000000000000001C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A1000004000000000000001B /* AnthropicService.swift */,
+				A1000005000000000000001B /* WebSearchService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A1000012000000000000001C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A1000006000000000000001B /* AnnotationView.swift */,
+				A1000007000000000000001B /* ArtifactView.swift */,
+				A1000008000000000000001B /* ChatView.swift */,
+				A1000009000000000000001B /* ChatViewModel.swift */,
+				A100000A000000000000001B /* MainView.swift */,
+				A100000B000000000000001B /* MessageBubble.swift */,
+				A100000C000000000000001B /* SettingsView.swift */,
+				A100000D000000000000001B /* WebBrowserView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A1000013000000000000001C /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				A100000E000000000000001B /* AppTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		C6CC591E2C1E5EA3004C7ED2 = {
 			isa = PBXGroup;
 			children = (
 				C6CC59292C1E5EA3004C7ED2 /* Henry */,
+				B2000014000000000000001C /* HenryTests */,
 				C6CC59282C1E5EA3004C7ED2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				C6CC59272C1E5EA3004C7ED2 /* Henry.app */,
+				B2000010000000000000001B /* HenryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,17 +170,12 @@
 		C6CC59292C1E5EA3004C7ED2 /* Henry */ = {
 			isa = PBXGroup;
 			children = (
-				C6C401832C277B470072582A /* LocationService.swift */,
-				C6C401822C277B470072582A /* ScreenCaptureService.swift */,
-				C6C401802C2685190072582A /* AnthropicService.swift */,
-				C6C4017E2C25C8120072582A /* Config.swift */,
 				C6CC592A2C1E5EA3004C7ED2 /* HenryApp.swift */,
-				C6CC59472C1E93A4004C7ED2 /* OpenAIResponse.swift */,
-				C6CC593B2C1E5FD0004C7ED2 /* AppMenu.swift */,
-				C6C401792C1EA22A0072582A /* AppMenuViewModel.swift */,
-				C6CC59482C1E93A4004C7ED2 /* OpenAIService.swift */,
-				C6CC592C2C1E5EA3004C7ED2 /* ContentView.swift */,
-				C6CC592E2C1E5EA3004C7ED2 /* Item.swift */,
+				C6C4017E2C25C8120072582A /* Config.swift */,
+				A1000010000000000000001C /* Models */,
+				A1000011000000000000001C /* Services */,
+				A1000012000000000000001C /* Views */,
+				A1000013000000000000001C /* Theme */,
 				C6CC59302C1E5EA4004C7ED2 /* Assets.xcassets */,
 				C6CC59322C1E5EA4004C7ED2 /* Henry.entitlements */,
 				C6CC59332C1E5EA4004C7ED2 /* Preview Content */,
@@ -100,6 +189,55 @@
 				C6CC59342C1E5EA4004C7ED2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B2000014000000000000001C /* HenryTests */ = {
+			isa = PBXGroup;
+			children = (
+				B2000015000000000000001C /* ModelTests */,
+				B2000016000000000000001C /* ServiceTests */,
+				B2000017000000000000001C /* ViewModelTests */,
+				B2000018000000000000001C /* TestHelpers */,
+			);
+			path = HenryTests;
+			sourceTree = "<group>";
+		};
+		B2000015000000000000001C /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				B2000001000000000000001B /* MessageTests.swift */,
+				B2000002000000000000001B /* ConversationTests.swift */,
+				B2000003000000000000001B /* ArtifactTests.swift */,
+				B2000004000000000000001B /* ImageAttachmentTests.swift */,
+			);
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
+		B2000016000000000000001C /* ServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				B2000005000000000000001B /* AnthropicServiceTests.swift */,
+				B2000006000000000000001B /* MultimodalServiceTests.swift */,
+				B2000007000000000000001B /* WebSearchServiceTests.swift */,
+			);
+			path = ServiceTests;
+			sourceTree = "<group>";
+		};
+		B2000017000000000000001C /* ViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				B2000008000000000000001B /* ChatViewModelTests.swift */,
+			);
+			path = ViewModelTests;
+			sourceTree = "<group>";
+		};
+		B2000018000000000000001C /* TestHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				B2000009000000000000001B /* MockConfig.swift */,
+				B200000A000000000000001B /* TestHelpers.swift */,
+			);
+			path = TestHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +265,23 @@
 			productReference = C6CC59272C1E5EA3004C7ED2 /* Henry.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B2000012000000000000001C /* HenryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2000019000000000000001C /* Build configuration list for PBXNativeTarget "HenryTests" */;
+			buildPhases = (
+				B2000013000000000000001C /* Sources */,
+				B2000011000000000000001C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B2000021000000000000001C /* PBXTargetDependency */,
+			);
+			name = HenryTests;
+			productName = HenryTests;
+			productReference = B2000010000000000000001B /* HenryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -139,6 +294,10 @@
 				TargetAttributes = {
 					C6CC59262C1E5EA3004C7ED2 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					B2000012000000000000001C = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = C6CC59262C1E5EA3004C7ED2;
 					};
 				};
 			};
@@ -160,6 +319,7 @@
 			projectRoot = "";
 			targets = (
 				C6CC59262C1E5EA3004C7ED2 /* Henry */,
+				B2000012000000000000001C /* HenryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -181,21 +341,51 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6C401812C2685190072582A /* AnthropicService.swift in Sources */,
-				C6CC592D2C1E5EA3004C7ED2 /* ContentView.swift in Sources */,
-				C6CC592F2C1E5EA3004C7ED2 /* Item.swift in Sources */,
-				C6C4017A2C1EA22A0072582A /* AppMenuViewModel.swift in Sources */,
-				C6CC593C2C1E5FD0004C7ED2 /* AppMenu.swift in Sources */,
-				C6CC59562C1E93A4004C7ED2 /* OpenAIResponse.swift in Sources */,
-				C6C401852C277B470072582A /* LocationService.swift in Sources */,
-				C6C401842C277B470072582A /* ScreenCaptureService.swift in Sources */,
-				C6C4017F2C25C8120072582A /* Config.swift in Sources */,
-				C6CC59572C1E93A4004C7ED2 /* OpenAIService.swift in Sources */,
 				C6CC592B2C1E5EA3004C7ED2 /* HenryApp.swift in Sources */,
+				C6C4017F2C25C8120072582A /* Config.swift in Sources */,
+				A1000001000000000000001A /* Artifact.swift in Sources */,
+				A1000002000000000000001A /* Conversation.swift in Sources */,
+				A1000003000000000000001A /* Message.swift in Sources */,
+				A1000004000000000000001A /* AnthropicService.swift in Sources */,
+				A1000005000000000000001A /* WebSearchService.swift in Sources */,
+				A1000006000000000000001A /* AnnotationView.swift in Sources */,
+				A1000007000000000000001A /* ArtifactView.swift in Sources */,
+				A1000008000000000000001A /* ChatView.swift in Sources */,
+				A1000009000000000000001A /* ChatViewModel.swift in Sources */,
+				A100000A000000000000001A /* MainView.swift in Sources */,
+				A100000B000000000000001A /* MessageBubble.swift in Sources */,
+				A100000C000000000000001A /* SettingsView.swift in Sources */,
+				A100000D000000000000001A /* WebBrowserView.swift in Sources */,
+				A100000E000000000000001A /* AppTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2000013000000000000001C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2000001000000000000001A /* MessageTests.swift in Sources */,
+				B2000002000000000000001A /* ConversationTests.swift in Sources */,
+				B2000003000000000000001A /* ArtifactTests.swift in Sources */,
+				B2000004000000000000001A /* ImageAttachmentTests.swift in Sources */,
+				B2000005000000000000001A /* AnthropicServiceTests.swift in Sources */,
+				B2000006000000000000001A /* MultimodalServiceTests.swift in Sources */,
+				B2000007000000000000001A /* WebSearchServiceTests.swift in Sources */,
+				B2000008000000000000001A /* ChatViewModelTests.swift in Sources */,
+				B2000009000000000000001A /* MockConfig.swift in Sources */,
+				B200000A000000000000001A /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B2000021000000000000001C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6CC59262C1E5EA3004C7ED2 /* Henry */;
+			targetProxy = B2000020000000000000001C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C6CC59362C1E5EA4004C7ED2 /* Debug */ = {
@@ -250,6 +440,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -305,6 +496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -318,35 +510,27 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Henry/Henry.entitlements;
-				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = Henry/Henry.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Henry/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=*]" = 14.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = PearlLabs.Henry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = macosx;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -361,29 +545,62 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Henry/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=*]" = 14.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = PearlLabs.Henry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = macosx;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		B200001A000000000000001C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PearlLabs.HenryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Henry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Henry";
+			};
+			name = Debug;
+		};
+		B200001B000000000000001C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PearlLabs.HenryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Henry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Henry";
 			};
 			name = Release;
 		};
@@ -404,6 +621,15 @@
 			buildConfigurations = (
 				C6CC59392C1E5EA4004C7ED2 /* Debug */,
 				C6CC593A2C1E5EA4004C7ED2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2000019000000000000001C /* Build configuration list for PBXNativeTarget "HenryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B200001A000000000000001C /* Debug */,
+				B200001B000000000000001C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

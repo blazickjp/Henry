@@ -215,10 +215,10 @@ final class MessageTests: XCTestCase {
         let message = Message(role: .assistant, content: content)
         message.extractArtifacts()
 
-        // Code block without language identifier should be treated as text
+        // Code block without language identifier defaults to "text" type
         XCTAssertEqual(message.artifacts.count, 1)
         XCTAssertEqual(message.artifacts[0].type, .code)
-        XCTAssertEqual(message.artifacts[0].language, "")
+        XCTAssertEqual(message.artifacts[0].language, "text")
     }
 
     func testNoCodeBlocks() {
@@ -259,5 +259,109 @@ final class MessageTests: XCTestCase {
     func testMessageRoleRawValue() {
         XCTAssertEqual(MessageRole.user.rawValue, "user")
         XCTAssertEqual(MessageRole.assistant.rawValue, "assistant")
+    }
+
+    // MARK: - Multimodal API Format Tests
+
+    func testAPIFormatMultimodalWithTextAndImage() {
+        let image = createTestImage()
+        let message = Message(role: .user, content: "What is this?", uiImages: [image])
+        let apiFormat = message.apiFormatMultimodal
+
+        XCTAssertEqual(apiFormat["role"] as? String, "user")
+
+        guard let content = apiFormat["content"] as? [[String: Any]] else {
+            XCTFail("Content should be array of blocks")
+            return
+        }
+
+        // Should have both image and text blocks
+        XCTAssertEqual(content.count, 2)
+        XCTAssertEqual(content[0]["type"] as? String, "image")
+        XCTAssertEqual(content[1]["type"] as? String, "text")
+        XCTAssertEqual(content[1]["text"] as? String, "What is this?")
+    }
+
+    func testAPIFormatMultimodalEmptyTextWithImage() {
+        // This test exposes the bug: empty text with images should still produce valid API format
+        let image = createTestImage()
+        let message = Message(role: .user, content: "", uiImages: [image])
+        let apiFormat = message.apiFormatMultimodal
+
+        guard let content = apiFormat["content"] as? [[String: Any]] else {
+            XCTFail("Content should be array of blocks")
+            return
+        }
+
+        // BUG: With empty text and an image, we need at least a placeholder text
+        // The Anthropic API requires non-empty content
+        // After fix: Should have image block + placeholder text block
+        XCTAssertGreaterThanOrEqual(content.count, 1, "Should have at least image block")
+
+        // Check that we have a text block (after fix this should pass)
+        let hasTextBlock = content.contains { $0["type"] as? String == "text" }
+        XCTAssertTrue(hasTextBlock, "Multimodal message with image should always have a text block for API compatibility")
+    }
+
+    func testAPIFormatMultimodalWhitespaceTextWithImage() {
+        let image = createTestImage()
+        let message = Message(role: .user, content: "   \n\t   ", uiImages: [image])
+        let apiFormat = message.apiFormatMultimodal
+
+        guard let content = apiFormat["content"] as? [[String: Any]] else {
+            XCTFail("Content should be array of blocks")
+            return
+        }
+
+        // Whitespace-only text should be treated similarly to empty text
+        // After fix: Should have a valid text block
+        let hasTextBlock = content.contains { $0["type"] as? String == "text" }
+        XCTAssertTrue(hasTextBlock, "Multimodal message should have text block even with whitespace-only content")
+    }
+
+    func testAPIFormatMultimodalTextOnly() {
+        let message = Message(role: .user, content: "Just text, no image")
+
+        // Text-only messages should use the simpler apiFormat
+        XCTAssertFalse(message.hasImages)
+        XCTAssertFalse(message.requiresMultimodalFormat)
+
+        // apiFormat should be simple string content
+        let simpleFormat = message.apiFormat
+        XCTAssertEqual(simpleFormat["content"], "Just text, no image")
+    }
+
+    func testHasImages() {
+        let textOnlyMessage = Message(role: .user, content: "No images")
+        XCTAssertFalse(textOnlyMessage.hasImages)
+
+        let image = createTestImage()
+        let imageMessage = Message(role: .user, content: "With image", uiImages: [image])
+        XCTAssertTrue(imageMessage.hasImages)
+    }
+
+    func testImageAttachmentEncodingDecoding() {
+        let image = createTestImage()
+        let message = Message(role: .user, content: "Test", uiImages: [image])
+
+        // Verify image was stored
+        XCTAssertEqual(message.imageAttachments.count, 1)
+
+        let attachment = message.imageAttachments[0]
+        XCTAssertEqual(attachment.mediaType, "image/png")
+        XCTAssertGreaterThan(attachment.imageData.count, 0)
+        XCTAssertNotNil(attachment.image)
+    }
+
+    // MARK: - Helper Methods
+
+    private func createTestImage() -> UIImage {
+        let size = CGSize(width: 50, height: 50)
+        let renderer = UIGraphicsImageRenderer(size: size)
+
+        return renderer.image { context in
+            UIColor.red.setFill()
+            context.fill(CGRect(origin: .zero, size: size))
+        }
     }
 }

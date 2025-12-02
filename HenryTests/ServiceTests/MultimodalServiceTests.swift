@@ -148,6 +148,78 @@ final class MultimodalServiceTests: XCTestCase {
         }
     }
 
+    // MARK: - Empty Content Edge Case Tests
+
+    func testConvertMessagesMultimodalEmptyTextWithImage() {
+        // This test exposes the bug: empty text with image should produce valid API format
+        let image = createTestImage()
+        let message = Message(role: .user, content: "", uiImages: [image])
+        let result = AnthropicService.convertMessagesMultimodal([message])
+
+        XCTAssertEqual(result.count, 1)
+
+        // The content should be an array (multimodal format)
+        guard let content = result[0]["content"] as? [[String: Any]] else {
+            XCTFail("Content should be array for multimodal message")
+            return
+        }
+
+        // After fix: Should have both image and text block
+        let hasImageBlock = content.contains { $0["type"] as? String == "image" }
+        let hasTextBlock = content.contains { $0["type"] as? String == "text" }
+
+        XCTAssertTrue(hasImageBlock, "Should have image block")
+        XCTAssertTrue(hasTextBlock, "Should have text block even with empty content for API compatibility")
+    }
+
+    func testConvertMessagesMultimodalWhitespaceTextWithImage() {
+        let image = createTestImage()
+        let message = Message(role: .user, content: "   \t\n   ", uiImages: [image])
+        let result = AnthropicService.convertMessagesMultimodal([message])
+
+        guard let content = result[0]["content"] as? [[String: Any]] else {
+            XCTFail("Content should be array for multimodal message")
+            return
+        }
+
+        let hasTextBlock = content.contains { $0["type"] as? String == "text" }
+        XCTAssertTrue(hasTextBlock, "Should have text block even with whitespace-only content")
+    }
+
+    func testConvertMessagesMultimodalAllContentValid() {
+        // Verify all messages in a conversation have valid content
+        let image = createTestImage()
+        let messages = [
+            Message(role: .user, content: "Hello"),
+            Message(role: .assistant, content: "Hi!"),
+            Message(role: .user, content: "", uiImages: [image]),  // Empty text with image
+            Message(role: .assistant, content: "I see the image")
+        ]
+
+        // Add small delays to ensure timestamp ordering
+        for (index, _) in messages.enumerated() {
+            if index > 0 {
+                Thread.sleep(forTimeInterval: 0.01)
+            }
+        }
+
+        let result = AnthropicService.convertMessagesMultimodal(messages)
+
+        // Every message should have non-empty content
+        for (index, apiMessage) in result.enumerated() {
+            if let stringContent = apiMessage["content"] as? String {
+                XCTAssertFalse(stringContent.isEmpty, "Message \(index) should have non-empty string content")
+            } else if let arrayContent = apiMessage["content"] as? [[String: Any]] {
+                XCTAssertFalse(arrayContent.isEmpty, "Message \(index) should have non-empty array content")
+                // Verify there's at least a text block
+                let hasText = arrayContent.contains { $0["type"] as? String == "text" }
+                XCTAssertTrue(hasText, "Message \(index) multimodal content should have text block")
+            } else {
+                XCTFail("Message \(index) has invalid content format")
+            }
+        }
+    }
+
     // MARK: - Helper Methods
 
     private func createTestImage() -> UIImage {
