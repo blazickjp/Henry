@@ -20,9 +20,47 @@ struct AnthropicRequest: Codable {
     }
 }
 
+/// Simple text-only message
 struct APIMessage: Codable {
     let role: String
     let content: String
+}
+
+// MARK: - Multimodal Content Types
+
+/// Content block for multimodal messages
+enum APIContentBlock {
+    case text(String)
+    case image(mediaType: String, base64Data: String)
+
+    var dictionary: [String: Any] {
+        switch self {
+        case .text(let text):
+            return ["type": "text", "text": text]
+        case .image(let mediaType, let base64Data):
+            return [
+                "type": "image",
+                "source": [
+                    "type": "base64",
+                    "media_type": mediaType,
+                    "data": base64Data
+                ]
+            ]
+        }
+    }
+}
+
+/// Multimodal message with text and/or images
+struct APIMultimodalMessage {
+    let role: String
+    let content: [APIContentBlock]
+
+    var dictionary: [String: Any] {
+        [
+            "role": role,
+            "content": content.map { $0.dictionary }
+        ]
+    }
 }
 
 struct Tool: Codable {
@@ -128,6 +166,102 @@ actor AnthropicService {
                 }
             }
         }
+    }
+
+    // MARK: - Multimodal Streaming Request
+
+    func streamMultimodalMessage(
+        messages: [[String: Any]],
+        model: String = defaultModel,
+        systemPrompt: String? = nil,
+        maxTokens: Int = 4096
+    ) -> AsyncThrowingStream<StreamEvent, Error> {
+        AsyncThrowingStream { continuation in
+            Task {
+                do {
+                    try await performMultimodalStreamRequest(
+                        messages: messages,
+                        model: model,
+                        systemPrompt: systemPrompt,
+                        maxTokens: maxTokens,
+                        continuation: continuation
+                    )
+                } catch {
+                    continuation.yield(.error(error))
+                    continuation.finish(throwing: error)
+                }
+            }
+        }
+    }
+
+    private func performMultimodalStreamRequest(
+        messages: [[String: Any]],
+        model: String,
+        systemPrompt: String?,
+        maxTokens: Int,
+        continuation: AsyncThrowingStream<StreamEvent, Error>.Continuation
+    ) async throws {
+        guard let url = URL(string: baseURL) else {
+            throw AnthropicError.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(apiVersion, forHTTPHeaderField: "anthropic-version")
+
+        // Build request body manually for multimodal
+        var body: [String: Any] = [
+            "model": model,
+            "max_tokens": maxTokens,
+            "messages": messages,
+            "stream": true
+        ]
+
+        if let system = systemPrompt ?? defaultSystemPrompt as String? {
+            body["system"] = system
+        }
+
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+        let (bytes, response) = try await URLSession.shared.bytes(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw AnthropicError.invalidResponse
+        }
+
+        guard httpResponse.statusCode == 200 else {
+            var errorBody = ""
+            for try await line in bytes.lines {
+                errorBody += line
+            }
+            throw AnthropicError.apiError("Status \(httpResponse.statusCode): \(errorBody)")
+        }
+
+        continuation.yield(.messageStart)
+
+        var buffer = ""
+        for try await line in bytes.lines {
+            buffer += line + "\n"
+
+            while let eventEnd = buffer.range(of: "\n\n") {
+                let eventData = String(buffer[..<eventEnd.lowerBound])
+                buffer = String(buffer[eventEnd.upperBound...])
+
+                if let event = parseSSEEvent(eventData) {
+                    continuation.yield(event)
+
+                    if case .messageEnd = event {
+                        continuation.finish()
+                        return
+                    }
+                }
+            }
+        }
+
+        continuation.yield(.messageEnd)
+        continuation.finish()
     }
 
     private func performStreamRequest(
@@ -331,10 +465,30 @@ actor AnthropicService {
 // MARK: - Convenience Extensions
 
 extension AnthropicService {
-    /// Convert Message models to API format
+    /// Convert Message models to API format (text only)
     static func convertMessages(_ messages: [Message]) -> [APIMessage] {
         messages.sorted { $0.timestamp < $1.timestamp }.map { message in
             APIMessage(role: message.role.rawValue, content: message.content)
         }
+    }
+
+    /// Convert Message models to multimodal API format (with images)
+    static func convertMessagesMultimodal(_ messages: [Message]) -> [[String: Any]] {
+        messages.sorted { $0.timestamp < $1.timestamp }.map { message in
+            if message.hasImages {
+                return message.apiFormatMultimodal
+            } else {
+                // Text-only messages can use simple format
+                return [
+                    "role": message.role.rawValue,
+                    "content": message.content
+                ]
+            }
+        }
+    }
+
+    /// Check if any messages contain images
+    static func hasMultimodalContent(_ messages: [Message]) -> Bool {
+        messages.contains { $0.hasImages }
     }
 }

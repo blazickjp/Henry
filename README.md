@@ -1,6 +1,6 @@
 # Henry - AI Chat for iPad
 
-Henry is a powerful iPad chat application powered by Anthropic's Claude API. It provides a ChatGPT-like experience with unique Anthropic features including **Artifacts** for code/HTML preview and **Web Browsing** capabilities.
+Henry is a powerful iPad chat application powered by Anthropic's Claude API. It provides a ChatGPT-like experience with unique Anthropic features including **Artifacts** for code/HTML preview, **Apple Pencil Annotation**, and **Web Browsing** capabilities.
 
 ## Features
 
@@ -9,6 +9,13 @@ Henry is a powerful iPad chat application powered by Anthropic's Claude API. It 
 - **Conversation History**: All chats are saved locally using SwiftData
 - **Multi-conversation Support**: Manage multiple chat threads with a sidebar interface
 - **Markdown Rendering**: Rich text formatting with code syntax highlighting
+
+### Apple Pencil Annotation
+- **Draw on Responses**: Use Apple Pencil to annotate any Claude response
+- **Mark Up Content**: Circle, highlight, or draw arrows to indicate specific areas
+- **Send Annotated Images**: Capture your annotations and send them back to Claude
+- **Visual Context**: Claude analyzes your drawings and responds to what you've marked
+- **Full PencilKit Support**: Access to all drawing tools, colors, and undo/redo
 
 ### Artifacts (Claude-style)
 - **Code Artifacts**: Extracted code blocks displayed as interactive artifacts
@@ -96,6 +103,7 @@ Henry/
 │   ├── ChatViewModel.swift     # Chat state management
 │   ├── MessageBubble.swift     # Message UI component
 │   ├── ArtifactView.swift      # Artifact preview panel
+│   ├── AnnotationView.swift    # PencilKit annotation overlay
 │   ├── WebBrowserView.swift    # In-app web browser
 │   └── SettingsView.swift      # App settings
 ├── Theme/
@@ -118,6 +126,8 @@ Henry/
 
 - **SwiftUI**: Modern declarative UI framework
 - **SwiftData**: Persistence for conversations and messages
+- **PencilKit**: Apple Pencil drawing and annotation
+- **Vision API**: Multimodal image understanding
 - **MVVM Pattern**: Clean separation of concerns
 - **Async/Await**: Modern concurrency for API calls
 - **Server-Sent Events**: Real-time streaming responses

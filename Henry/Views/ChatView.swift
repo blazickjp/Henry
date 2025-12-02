@@ -27,6 +27,19 @@ struct ChatView: View {
             .animation(.easeInOut(duration: 0.3), value: viewModel.showArtifactPanel)
         }
         .background(Color.backgroundPrimary)
+        .sheet(isPresented: $viewModel.showAnnotationView) {
+            if let image = viewModel.annotationSourceImage {
+                AnnotationView(
+                    isPresented: $viewModel.showAnnotationView,
+                    contentToAnnotate: image,
+                    onSend: { annotatedImage, message in
+                        Task {
+                            await viewModel.sendAnnotatedMessage(image: annotatedImage, text: message)
+                        }
+                    }
+                )
+            }
+        }
     }
 
     // MARK: - Chat Area
@@ -71,6 +84,7 @@ struct ChatView: View {
             VStack(alignment: .leading, spacing: Spacing.md) {
                 featureRow(icon: "doc.text", text: "Create and preview code artifacts")
                 featureRow(icon: "globe", text: "Search the web for information")
+                featureRow(icon: "pencil.tip.crop.circle", text: "Annotate with Apple Pencil")
                 featureRow(icon: "bubble.left.and.bubble.right", text: "Have natural conversations")
             }
             .padding(.top, Spacing.lg)
@@ -106,6 +120,9 @@ struct ChatView: View {
                             message: message,
                             onArtifactTap: { artifact in
                                 viewModel.selectArtifact(artifact)
+                            },
+                            onAnnotate: { message, image in
+                                viewModel.startAnnotation(for: message, with: image)
                             }
                         )
                         .id(message.id)

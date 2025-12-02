@@ -4,9 +4,18 @@ import MarkdownUI
 struct MessageBubble: View {
     let message: Message
     let onArtifactTap: (Artifact) -> Void
+    let onAnnotate: ((Message, UIImage) -> Void)?
+
+    @State private var bubbleSize: CGSize = .zero
 
     private var isUser: Bool {
         message.role == .user
+    }
+
+    init(message: Message, onArtifactTap: @escaping (Artifact) -> Void, onAnnotate: ((Message, UIImage) -> Void)? = nil) {
+        self.message = message
+        self.onArtifactTap = onArtifactTap
+        self.onAnnotate = onAnnotate
     }
 
     var body: some View {
@@ -16,22 +25,64 @@ struct MessageBubble: View {
             }
 
             VStack(alignment: isUser ? .trailing : .leading, spacing: Spacing.sm) {
+                // Image attachments (for user messages with images)
+                if message.hasImages {
+                    imageAttachments
+                }
+
                 // Message Content
                 messageContent
+                    .background(
+                        GeometryReader { geo in
+                            Color.clear
+                                .onAppear { bubbleSize = geo.size }
+                                .onChange(of: geo.size) { _, newSize in bubbleSize = newSize }
+                        }
+                    )
 
                 // Artifacts (if any)
                 if !message.artifacts.isEmpty {
                     artifactButtons
                 }
 
-                // Timestamp
-                Text(message.timestamp.formatted(date: .omitted, time: .shortened))
-                    .font(.caption2)
-                    .foregroundColor(.textSecondary)
+                // Action buttons row
+                HStack(spacing: Spacing.md) {
+                    // Annotate button (only for assistant messages)
+                    if !isUser, onAnnotate != nil {
+                        annotateButton
+                    }
+
+                    Spacer()
+
+                    // Timestamp
+                    Text(message.timestamp.formatted(date: .omitted, time: .shortened))
+                        .font(.caption2)
+                        .foregroundColor(.textSecondary)
+                }
             }
 
             if !isUser {
                 Spacer(minLength: 60)
+            }
+        }
+    }
+
+    // MARK: - Image Attachments
+
+    private var imageAttachments: some View {
+        VStack(alignment: isUser ? .trailing : .leading, spacing: Spacing.xs) {
+            ForEach(message.imageAttachments, id: \.id) { attachment in
+                if let image = attachment.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 300, maxHeight: 300)
+                        .cornerRadius(Spacing.cardCornerRadius)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: Spacing.cardCornerRadius)
+                                .stroke(Color.artifactBorder, lineWidth: 1)
+                        )
+                }
             }
         }
     }
@@ -52,6 +103,35 @@ struct MessageBubble: View {
         }
     }
 
+    // MARK: - Annotate Button
+
+    private var annotateButton: some View {
+        Button {
+            captureAndAnnotate()
+        } label: {
+            HStack(spacing: Spacing.xs) {
+                Image(systemName: "pencil.tip.crop.circle")
+                    .font(.caption)
+                Text("Annotate")
+                    .font(.caption)
+            }
+            .foregroundColor(.claudeOrange)
+            .padding(.horizontal, Spacing.sm)
+            .padding(.vertical, Spacing.xs)
+            .background(Color.claudeOrange.opacity(0.1))
+            .cornerRadius(Spacing.sm)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func captureAndAnnotate() {
+        // Capture the message content as an image
+        let contentView = MessageContentSnapshot(message: message)
+        let image = contentView.snapshot(size: CGSize(width: min(bubbleSize.width, 600), height: bubbleSize.height + 40))
+
+        onAnnotate?(message, image)
+    }
+
     // MARK: - Artifact Buttons
 
     private var artifactButtons: some View {
@@ -62,6 +142,22 @@ struct MessageBubble: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - Message Content Snapshot View
+
+struct MessageContentSnapshot: View {
+    let message: Message
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: Spacing.sm) {
+            Markdown(message.content)
+                .markdownTheme(.claude)
+        }
+        .padding()
+        .background(Color.assistantBubble)
+        .cornerRadius(Spacing.bubbleCornerRadius)
     }
 }
 
@@ -160,7 +256,8 @@ struct ArtifactButton: View {
                 m.extractArtifacts()
                 return m
             }(),
-            onArtifactTap: { _ in }
+            onArtifactTap: { _ in },
+            onAnnotate: { _, _ in }
         )
     }
     .padding()
